@@ -6,15 +6,15 @@
 
 stdenv.mkDerivation rec {
   name = "epiphany-${version}";
-  version = "3.30.3";
+  version = "3.31.92";
 
   src = fetchurl {
     url = "mirror://gnome/sources/epiphany/${stdenv.lib.versions.majorMinor version}/${name}.tar.xz";
-    sha256 = "05qdzx18ld1m3xiajpz6y6snfj56bgyjsgm7f4rqrnpjdbdvikbn";
+    sha256 = "00rq462nn2hbz8y4d8r8ibxzxh079gjg4pxzbqixjz8p20l1fiq3";
   };
 
   # Tests need an X display
-  mesonFlags = [ "-Dunit_tests=false" ];
+  mesonFlags = [ "-Dunit_tests=disabled" ];
 
   nativeBuildInputs = [
     meson ninja libxslt pkgconfig itstool gettext wrapGAppsHook desktop-file-utils python3
