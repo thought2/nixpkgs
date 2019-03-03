@@ -9,20 +9,19 @@
 
 let
   pname = "gvfs";
-  version = "1.38.1";
+  version = "1.39.92";
 in stdenv.mkDerivation rec {
   name = "${pname}-${version}";
 
   src = fetchurl {
     url = "mirror://gnome/sources/${pname}/${stdenv.lib.versions.majorMinor version}/${name}.tar.xz";
-    sha256 = "18311pn5kp9b4kf5prvhcjs0cwf7fm3mqh6s6p42avcr5j26l4zd";
+    sha256 = "04smpm0bmcmfx0k9glihyinqmys8las3pag5rg4bcs3j29y30i5f";
   };
 
   postPatch = ''
     # patchShebangs requires executable file
-    chmod +x codegen.py meson_post_install.py
+    chmod +x meson_post_install.py
     patchShebangs meson_post_install.py
-    patchShebangs codegen.py
     patchShebangs test test-driver
   '';
 
