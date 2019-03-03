@@ -6,11 +6,11 @@ let
 in
 stdenv.mkDerivation rec {
   name = "${pname}-${version}";
-  version = "0.30.1";
+  version = "0.31.92";
 
   src = fetchurl {
     url = "mirror://gnome/sources/${pname}/${stdenv.lib.versions.majorMinor version}/${name}.tar.xz";
-    sha256 = "1dq2dn7qmxr4fxzx9wnag89ck24gxq17p2n4gl81h4w8qdy3m6jl";
+    sha256 = "1in7b7ikbzc88iiyb9hd35rvzgn0k2hbjh5wzvmjja441y7ndll5";
   };
 
   patches = [
@@ -23,8 +23,9 @@ stdenv.mkDerivation rec {
   ];
 
   postPatch = ''
-    chmod +x meson_post_install.py
+    chmod +x meson_post_install.py tests/test-dconf.py
     patchShebangs meson_post_install.py
+    patchShebangs tests/test-dconf.py
   '';
 
   outputs = [ "out" "lib" "dev" "devdoc" ];
