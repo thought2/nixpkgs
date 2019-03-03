@@ -2,11 +2,11 @@
 
 stdenv.mkDerivation rec {
   name = "yelp-tools-${version}";
-  version = "3.28.0";
+  version = "3.31.90";
 
   src = fetchurl {
     url = "mirror://gnome/sources/yelp-tools/${stdenv.lib.versions.majorMinor version}/${name}.tar.xz";
-    sha256 = "1b61dmlb1sd50fgq6zgnkcpx2s1py33q0x9cx67fzpsr4gmgxnw2";
+    sha256 = "106k51chmhypsv2mp5yjsnjffgaha6lzafdj2y53i2d5msm0ry16";
   };
 
   passthru = {
