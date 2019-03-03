@@ -5,11 +5,11 @@
 
 stdenv.mkDerivation rec {
   name = "yelp-${version}";
-  version = "3.30.0";
+  version = "3.31.90";
 
   src = fetchurl {
     url = "mirror://gnome/sources/yelp/${stdenv.lib.versions.majorMinor version}/${name}.tar.xz";
-    sha256 = "060a902j15k76fyhk8xfl38ipvrrcc0qd7nm2mcck4ifb45b0zv4";
+    sha256 = "1fz0d6araxaqyai6q85qwa307x8cpriwfwk9028hiygavmj0sgcg";
   };
 
   nativeBuildInputs = [ pkgconfig intltool itstool wrapGAppsHook ];
