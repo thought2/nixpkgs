@@ -4,7 +4,7 @@
 
 let
   pname = "atk";
-  version = "2.30.0";
+  version = "2.31.92";
 in
 
 stdenv.mkDerivation rec {
@@ -12,7 +12,7 @@ stdenv.mkDerivation rec {
 
   src = fetchurl {
     url = "mirror://gnome/sources/${pname}/${stdenv.lib.versions.majorMinor version}/${name}.tar.xz";
-    sha256 = "0yq25iisnf0rmlg2x5ghzqk9vhf2jramb2khxqghqakz47a90kfx";
+    sha256 = "062s3i9n0g6rfw77hdfpyqn9i8mwq9pq9gy10s0dlwcrs58wjvmh";
   };
 
   outputs = [ "out" "dev" ];
