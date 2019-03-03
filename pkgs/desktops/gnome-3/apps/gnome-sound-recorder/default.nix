@@ -1,24 +1,29 @@
-{ stdenv, fetchurl, fetchpatch, pkgconfig, intltool, gobject-introspection, wrapGAppsHook, gjs, glib, gtk3, gdk_pixbuf, gst_all_1, gnome3 }:
+{ stdenv, fetchurl, fetchpatch, pkgconfig, gettext, gobject-introspection, wrapGAppsHook, gjs, glib, gtk3, gdk_pixbuf, gst_all_1, gnome3
+, meson, ninja, python3, hicolor-icon-theme }:
 
 stdenv.mkDerivation rec {
   pname = "gnome-sound-recorder";
-  version = "3.28.2";
+  version = "3.31.92";
 
   src = fetchurl {
     url = "mirror://gnome/sources/${pname}/${stdenv.lib.versions.majorMinor version}/${pname}-${version}.tar.xz";
-    sha256 = "1k63xr3d16qbzi88md913ndaf2mzwmhmi6hipj0123sm7nsz1p94";
+    sha256 = "1jmdqdrl1hkvqx3kp24cqzpag20mrw7ypnmlpn85i4yf0hc5il7h";
   };
 
+  nativeBuildInputs = [
+    pkgconfig gettext meson ninja gobject-introspection
+    wrapGAppsHook python3 hicolor-icon-theme
+  ];
+  buildInputs = [ gjs glib gtk3 gdk_pixbuf ] ++ (with gst_all_1; [ gstreamer.dev gstreamer gst-plugins-base gst-plugins-good gst-plugins-bad ]);
+
   patches = [
-    # Fix crash when trying to play recordings
-    (fetchpatch {
-      url = https://gitlab.gnome.org/GNOME/gnome-sound-recorder/commit/2b311ef67909bc20d0e87f334fe37bf5c4e9f29f.patch;
-      sha256 = "0hqmk846bxma0p66cqp94zd02zc1if836ywjq3sv5dsfwnz7jv3f";
-    })
+    ./fix-post-install.patch
   ];
 
-  nativeBuildInputs = [ pkgconfig intltool gobject-introspection wrapGAppsHook ];
-  buildInputs = [ gjs glib gtk3 gdk_pixbuf ] ++ (with gst_all_1; [ gstreamer.dev gstreamer gst-plugins-base gst-plugins-good gst-plugins-bad ]);
+  postPatch = ''
+    chmod +x build-aux/meson_post_install.py
+    patchShebangs build-aux/meson_post_install.py
+  '';
 
   # TODO: fix this in gstreamer
   # TODO: make stdenv.lib.getBin respect outputBin

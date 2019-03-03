@@ -1,0 +1,11 @@
+--- a/build-aux/meson_post_install.py
++++ b/build-aux/meson_post_install.py
+@@ -21,6 +21,6 @@ if not os.environ.get('DESTDIR'):
+ 
+     print('Updating icon cache...')
+     subprocess.call(['gtk-update-icon-cache', '-qtf', os.path.join(datadir, 'icons', 'hicolor')])
+ 
+-    print('Updating desktop database...')
+-    subprocess.call(['update-desktop-database', '-q', os.path.join(datadir, 'applications')])
++    # print('Updating desktop database...')
++    # subprocess.call(['update-desktop-database', '-q', os.path.join(datadir, 'applications')])
