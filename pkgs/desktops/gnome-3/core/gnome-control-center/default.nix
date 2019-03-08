@@ -9,7 +9,7 @@
 , gtk3, glib, glib-networking, gsettings-desktop-schemas
 , gnome-desktop, gnome-settings-daemon, gnome-online-accounts
 , vino, gnome-bluetooth, tracker, adwaita-icon-theme
-, udisks2, gsound }:
+, udisks2, gsound, libhandy }:
 
 let
   pname = "gnome-control-center";
@@ -35,7 +35,7 @@ in stdenv.mkDerivation rec {
     grilo libpwquality cracklib vino libcanberra-gtk3 libgudev libsecret
     gdk_pixbuf adwaita-icon-theme librsvg clutter clutter-gtk cheese
     networkmanager modemmanager gnome-bluetooth tracker
-    udisks2 gsound
+    udisks2 gsound libhandy
   ];
 
   patches = [
