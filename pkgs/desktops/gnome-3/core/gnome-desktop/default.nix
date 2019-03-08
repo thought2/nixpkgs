@@ -34,11 +34,6 @@ stdenv.mkDerivation rec {
       bubblewrap_bin = "${bubblewrap}/bin/bwrap";
       inherit (builtins) storeDir;
     })
-    (fetchpatch {
-      name = "fix-missing-font-cache";
-      url = https://gitlab.gnome.org/GNOME/gnome-desktop/commit/b87de7495160dbf48f01aa1ddb361fc2556ffd0c.patch;
-      sha256 = "1aw7lw93kcflmqmbx25cwja25441i8xzvgjm1pfsxvw3vr8j6scb";
-    })
   ];
 
   mesonFlags = [
