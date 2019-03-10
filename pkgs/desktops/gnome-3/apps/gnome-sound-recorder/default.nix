@@ -1,5 +1,5 @@
 { stdenv, fetchurl, fetchpatch, pkgconfig, gettext, gobject-introspection, wrapGAppsHook, gjs, glib, gtk3, gdk_pixbuf, gst_all_1, gnome3
-, meson, ninja, python3, hicolor-icon-theme }:
+, meson, ninja, python3, hicolor-icon-theme, desktop-file-utils }:
 
 stdenv.mkDerivation rec {
   pname = "gnome-sound-recorder";
@@ -12,13 +12,9 @@ stdenv.mkDerivation rec {
 
   nativeBuildInputs = [
     pkgconfig gettext meson ninja gobject-introspection
-    wrapGAppsHook python3 hicolor-icon-theme
+    wrapGAppsHook python3 hicolor-icon-theme desktop-file-utils
   ];
   buildInputs = [ gjs glib gtk3 gdk_pixbuf ] ++ (with gst_all_1; [ gstreamer.dev gstreamer gst-plugins-base gst-plugins-good gst-plugins-bad ]);
-
-  patches = [
-    ./fix-post-install.patch
-  ];
 
   postPatch = ''
     chmod +x build-aux/meson_post_install.py
