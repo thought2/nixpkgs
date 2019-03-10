@@ -36,7 +36,7 @@ let
   srcs = {
     third_party =
       map (x : ((fetchurl {inherit (x) url sha256 name;}) // {inherit (x) md5name md5;}))
-      ((import ./libreoffice-srcs-still.nix) ++ [
+      ((import ./libreoffice-srcs.nix) ++ [
         (rec {
           name = "unowinreg.dll";
           url = "https://dev-www.libreoffice.org/extern/${md5name}";
@@ -48,14 +48,14 @@ let
 
     translations = fetchSrc {
       name = "translations";
-      sha256 = "1rk8f77gwqyrnrxpfrvmr03n49bb09idxwzzindxxgcagh3d0p5f";
+      sha256 = "15fdni68b3kyl6115v0d24cl0dp1hdjhkx571w086lrpz0fk9mfi";
     };
 
     # TODO: dictionaries
 
     help = fetchSrc {
       name = "help";
-      sha256 = "076xq1vlsyi2fv3r7rw595075pi08slbzwwc5h9gda3frx1jkj4i";
+      sha256 = "0bfjg14bnqlqwjcc3lkax0nfrhpm6nrqn7ycrmf4r3dzn10lgr64";
     };
 
   };
@@ -68,7 +68,9 @@ in stdenv.mkDerivation rec {
   # of rasqal/rasqal.h
   NIX_CFLAGS_COMPILE = [ "-I${librdf_rasqal}/include/rasqal" ];
 
-  patches = [ ./xdg-open-brief.patch ];
+  patches = [
+    ./xdg-open-brief.patch
+  ];
 
   postUnpack = ''
     mkdir -v $sourceRoot/src
@@ -225,6 +227,8 @@ in stdenv.mkDerivation rec {
     # Without these, configure does not finish
     "--without-junit"
 
+    "--disable-libnumbertext" # system-libnumbertext"
+
     # I imagine this helps. Copied from go-oo.
     # Modified on every upgrade, though
     "--disable-odk"
@@ -284,7 +288,7 @@ in stdenv.mkDerivation rec {
   requiredSystemFeatures = [ "big-parallel" ];
 
   meta = with lib; {
-    description = "Comprehensive, professional-quality productivity suite (Still/stable release)";
+    description = "Comprehensive, professional-quality productivity suite (Still/Stable release)";
     homepage = https://libreoffice.org/;
     license = licenses.lgpl3;
     maintainers = with maintainers; [ raskin ];

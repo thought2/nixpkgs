@@ -48,14 +48,14 @@ let
 
     translations = fetchSrc {
       name = "translations";
-      sha256 = "1lgyns8zmwky1p78rvilnixqmicpfaal6x6286l4m7hv46pha181";
+      sha256 = "180d4rrzb3lq7g2w7x512fn8chfkjg4ld20ikrj6hkg11kj4hbmy";
     };
 
     # TODO: dictionaries
 
     help = fetchSrc {
       name = "help";
-      sha256 = "0ia490xksnhh4m5fas6irr7qbnkaap7zs3fg8jbq4qrfjh81bcpm";
+      sha256 = "06fgd5jkqqbvskyj1ywmsmb4crsj064s8r45nrv0r8j6ydn0hi1l";
     };
 
   };
@@ -70,7 +70,6 @@ in stdenv.mkDerivation rec {
 
   patches = [
     ./xdg-open-brief.patch
-    ./poppler.patch
   ];
 
   postUnpack = ''
